@@ -1,0 +1,27 @@
+[
+  {
+    "name": "blue",
+    "title": "blue",
+    "color": "navy"
+  },
+  {
+    "name": "red",
+    "title": "red",
+    "color": "#ed143d"
+  },
+  {
+    "name": "green",
+    "title": "green",
+    "color": "green"
+  },
+  {
+    "name": "brown",
+    "title": "brown",
+    "color": "brown"
+  },
+  {
+    "name": "yellow",
+    "title": "yellow",
+    "color": "yellow"
+  }
+]
