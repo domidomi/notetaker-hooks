@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.scss";
 
 import styled from "styled-components";
 
-import { Sidebar } from "../../components";
+import { Navbar, NotesList } from "../../components";
 
 import notesData from "../../assets/notes.json";
+import tagsData from "../../assets/tags.json";
 
 const StyledContainer = styled.div`
   background-color: #eee;
   display: flex;
   height: 100vh;
+  flex-direction: column;
 `;
 
-const StyledSidebar = styled.div`
-  width: 20%;
-  min-width: 300px;
-  height: 100%;
-  flex: 0 0 auto;
+const StyledNavbar = styled.div`
+  width: 100%;
+  height: 70px;
+  position: fixed;
 `;
 
 const StyledContent = styled.div`
-  flex: 1 1 auto;
-  overflow: auto;
+  padding-top: 70px;
 `;
 
 const Title = styled.div`
@@ -30,23 +30,35 @@ const Title = styled.div`
 `;
 
 const App = () => {
-  const [notes, setNotes] = useState(notesData);
+  const [displayedNotes, setDisplayedNotes] = useState(notesData);
+  const [notesFilter, setNotesFilter] = useState(null);
 
-  useEffect(() => {});
+  const handleNoteFilterChange = useCallback(filter => {
+    setNotesFilter(filter);
+  }, []);
+
+  useEffect(() => {
+    let notesFromTag = notesData;
+
+    if (notesFilter) {
+      notesFromTag = notesFromTag.filter(note =>
+        note.tags.includes(notesFilter.name)
+      );
+    }
+
+    setDisplayedNotes(notesFromTag);
+  }, [notesFilter]);
 
   return (
     <StyledContainer fluid={true}>
-      <StyledSidebar>
-        <Sidebar notes={notes} />
-      </StyledSidebar>
+      <StyledNavbar>
+        <Navbar
+          activeFilter={notesFilter}
+          handleNoteFilterChange={handleNoteFilterChange}
+        />
+      </StyledNavbar>
       <StyledContent>
-        <Title> Notetaker app!</Title>
-        <Title> Notetaker app!</Title>
-        <Title> Notetaker app!</Title>
-        <Title> Notetaker app!</Title>
-        <Title> Notetaker app!</Title>
-        <Title> Notetaker app!</Title>
-        <Title> Notetaker app!</Title>
+        <NotesList notes={displayedNotes} />
       </StyledContent>
     </StyledContainer>
   );
