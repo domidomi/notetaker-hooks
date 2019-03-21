@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { Navbar, NotesList } from "../../components";
 
 import notesData from "../../assets/notes.json";
-import tagsData from "../../assets/tags.json";
 
 const StyledContainer = styled.div`
   background-color: #eee;
@@ -25,21 +24,15 @@ const StyledContent = styled.div`
   padding-top: 70px;
 `;
 
-const Title = styled.div`
-  font-size: 160px;
-`;
-
 const App = () => {
   const [displayedNotes, setDisplayedNotes] = useState(notesData);
   const [notesFilter, setNotesFilter] = useState(null);
 
   const handleNoteFilterChange = useCallback(filter => {
     setNotesFilter(filter);
-    console.log("handleNoteFilterChange")
   }, []);
 
   useEffect(() => {
-    console.log("APP use effect")
     let notesFromTag = notesData;
 
     if (notesFilter) {

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import CategoryCard from "../CategoryCard/CategoryCard";
+import { CategoryCard} from "../";
 import tagsData from "../../assets/tags.json";
 
 const NavbarContent = styled.div`
@@ -16,7 +16,6 @@ const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
   const [filtersToDisplay, setFiltersToDisplay] = useState(null);
 
   const getFiltersToDisplay = () => {
-    console.log("recalculating?");
     return filters.map(filter => (
       <CategoryCard
         category={filter}
@@ -27,22 +26,12 @@ const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
   };
 
   useEffect(() => {
-    console.log("effect called");
     setFiltersToDisplay(getFiltersToDisplay());
   }, [activeFilter]);
 
-  // const filtersToDisplay = useMemo(
-  //   () => getFiltersToDisplay(),
-  //   [activeFilter] // Don’t recalculate until `activeFilter` changes
-  // );
-
   return (
     <NavbarContent>
-      {console.log("navbar rewrite")}
-
       {filters && filtersToDisplay}
-
-      {!filters && <h4>No notes :(</h4>}
     </NavbarContent>
   );
 };
