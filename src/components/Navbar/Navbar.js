@@ -13,9 +13,10 @@ const NavbarContent = styled.div`
 
 const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
   const [filters, setFilters] = useState(tagsData);
+  const [filtersToDisplay, setFiltersToDisplay] = useState(null);
 
   const getFiltersToDisplay = () => {
-    console.log("recalculating?")
+    console.log("recalculating?");
     return filters.map(filter => (
       <CategoryCard
         category={filter}
@@ -25,10 +26,15 @@ const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
     ));
   };
 
-  const filtersToDisplay = useMemo(
-    () => getFiltersToDisplay(),
-    [activeFilter] // ✅ Don’t recalculate until `activeFilter` changes
-  );
+  useEffect(() => {
+    console.log("effect called");
+    setFiltersToDisplay(getFiltersToDisplay());
+  }, [activeFilter]);
+
+  // const filtersToDisplay = useMemo(
+  //   () => getFiltersToDisplay(),
+  //   [activeFilter] // Don’t recalculate until `activeFilter` changes
+  // );
 
   return (
     <NavbarContent>

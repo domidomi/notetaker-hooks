@@ -35,9 +35,11 @@ const App = () => {
 
   const handleNoteFilterChange = useCallback(filter => {
     setNotesFilter(filter);
+    console.log("handleNoteFilterChange")
   }, []);
 
   useEffect(() => {
+    console.log("APP use effect")
     let notesFromTag = notesData;
 
     if (notesFilter) {

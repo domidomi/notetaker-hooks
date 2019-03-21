@@ -20,6 +20,7 @@ const CardTitle = styled.div`
 const CategoryCard = ({ category, handleNoteFilterChange, active }) => {
   return (
     <Card>
+      {console.log('category card render: ', category.name)}
       <CardTitle
         color={category.color}
         onClick={() => handleNoteFilterChange(active ? null : category)}
