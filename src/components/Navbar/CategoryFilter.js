@@ -19,7 +19,7 @@ const CardTitle = styled.div`
 `;
 
 const CategoryFilter = ({ category, handleNoteFilterChange, active }) => {
-  const { name, color } = category || {};
+  const { title, color } = category || {};
 
   return (
     <Card>
@@ -28,7 +28,7 @@ const CategoryFilter = ({ category, handleNoteFilterChange, active }) => {
         onClick={() => handleNoteFilterChange(active ? null : category)}
         active={active}
       >
-        {name || "All"}
+        {title || "All"}
       </CardTitle>
     </Card>
   );

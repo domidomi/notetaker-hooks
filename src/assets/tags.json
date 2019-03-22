@@ -1,27 +1,27 @@
 [
   {
     "name": "blue",
-    "title": "blue",
-    "color": "navy"
+    "title": "shopping",
+    "color": "#42a5f5"
   },
   {
     "name": "red",
-    "title": "red",
-    "color": "#ed143d"
+    "title": "important",
+    "color": "#ef5350"
   },
   {
     "name": "green",
-    "title": "green",
-    "color": "green"
+    "title": "Appointments",
+    "color": "#66bb6a"
   },
   {
     "name": "brown",
-    "title": "brown",
-    "color": "brown"
+    "title": "Misc",
+    "color": "#795548"
   },
   {
     "name": "yellow",
-    "title": "yellow",
-    "color": "yellow"
+    "title": "Hobby",
+    "color": "#ffca28"
   }
 ]
