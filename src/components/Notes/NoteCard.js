@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import tagsData from "../../../assets/tags.json";
-import { ColorTag } from "../../index";
+import tagsData from "../../assets/tags.json";
+import { ColorTag } from "../index";
 
 const Note = styled.div`
   display: inline-block;

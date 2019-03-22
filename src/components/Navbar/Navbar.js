@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { CategoryFilter } from "../";
+import { CategoryFilter } from "../index";
 import tagsData from "../../assets/tags.json";
 
 const NavbarContent = styled.div`
