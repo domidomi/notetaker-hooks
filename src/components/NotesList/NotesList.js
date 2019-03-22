@@ -7,19 +7,15 @@ const NotesListContent = styled.div`
 `;
 
 const NotesList = ({ notes }) => {
-  const [notesToDisplay, setNotesToDisplay] = useState(null);
-
-  const getNotesToDisplay = () => {
-    return notes.map(note => <NoteCard data={note} />);
-  };
+  const [notesToDisplay, setNotesToDisplay] = useState(notes);
 
   useEffect(() => {
-    setNotesToDisplay(getNotesToDisplay());
+    setNotesToDisplay(notes);
   }, [notes]);
 
   return (
     <NotesListContent>
-      {notes && notesToDisplay}
+      {notesToDisplay && notesToDisplay.map(note => <NoteCard key={note._id} data={note} />)}
 
       {!notes && <h4>No notes :(</h4>}
     </NotesListContent>

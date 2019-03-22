@@ -17,19 +17,20 @@ const CardTitle = styled.div`
   color: ${props => (props.active ? props.color : "#000")};
 `;
 
-const CategoryCard = ({ category, handleNoteFilterChange, active }) => {
+const CategoryFilter = ({ category, handleNoteFilterChange, active }) => {
+  const { name, color } = category || {};
+
   return (
     <Card>
-      {console.log('category card render: ', category.name)}
       <CardTitle
-        color={category.color}
+        color={color}
         onClick={() => handleNoteFilterChange(active ? null : category)}
         active={active}
       >
-        {category.name}
+        {name || "All"}
       </CardTitle>
     </Card>
   );
 };
 
-export default CategoryCard;
+export default CategoryFilter;

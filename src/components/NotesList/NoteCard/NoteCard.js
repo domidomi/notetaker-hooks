@@ -54,9 +54,10 @@ const NoteCard = ({ data }) => {
     <Note>
       <NoteWrapper>
         <NoteTitle>{data.content.title}</NoteTitle>
-        <NoteContent>{data.content.title}</NoteContent>
+        <NoteContent>{data.content.text}</NoteContent>
         <NoteFooter>
-          {tags && tags.map(tag => <ColorTag color={tag.color} />)}
+          {tags &&
+            tags.map(tag => <ColorTag key={tag.name} color={tag.color} />)}
         </NoteFooter>
       </NoteWrapper>
     </Note>
