@@ -18,6 +18,7 @@ const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
     <NavbarContent>
       {filters ? (
         <>
+          <span>Filter: </span>
           <CategoryFilter
             key={"all"}
             category={null}

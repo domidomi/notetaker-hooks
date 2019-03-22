@@ -3,18 +3,19 @@ import styled from "styled-components";
 
 const Card = styled.div`
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   width: auto;
-  margin-bottom: 20px;
+  margin: 0 10px 0 0;
+  cursor: pointer;
 `;
 
 const CardTitle = styled.div`
-  border-bottom: 4px solid ${props => props.color || "#ccc"};
-  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0px -4px 0px ${props => props.color || "#ccc"};
+  padding: 4px 10px 8px;
   text-transform: capitalize;
   font-family: "Verdana";
-  color: ${props => (props.active ? props.color : "#000")};
+  background-color: ${props => (props.active ? "#efefef" : "#fff")};
 `;
 
 const CategoryFilter = ({ category, handleNoteFilterChange, active }) => {
