@@ -35,6 +35,8 @@ const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
           ))}
         </>
       ) : null}
+
+      
     </NavbarContent>
   );
 };
