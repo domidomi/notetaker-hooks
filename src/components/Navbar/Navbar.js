@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { CategoryFilter } from "../";
@@ -12,26 +12,28 @@ const NavbarContent = styled.div`
 `;
 
 const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
-  const [filters, setFilters] = useState(tagsData);
+  const [filters, setFilters] = useState(() => tagsData);
 
   return (
     <NavbarContent>
-      {filters && (
+      {filters ? (
+        <>
           <CategoryFilter
             key={"all"}
             category={null}
             handleNoteFilterChange={handleNoteFilterChange}
             active={activeFilter === null}
           />
-        ) &&
-        filters.map(filter => (
-          <CategoryFilter
-            key={filter.name}
-            category={filter}
-            handleNoteFilterChange={handleNoteFilterChange}
-            active={Object.is(filter, activeFilter)}
-          />
-        ))}
+          {filters.map(filter => (
+            <CategoryFilter
+              key={filter.name}
+              category={filter}
+              handleNoteFilterChange={handleNoteFilterChange}
+              active={Object.is(filter, activeFilter)}
+            />
+          ))}
+        </>
+      ) : null}
     </NavbarContent>
   );
 };
