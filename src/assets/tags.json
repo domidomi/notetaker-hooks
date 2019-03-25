@@ -1,26 +1,26 @@
 [
   {
-    "name": "blue",
+    "name": "shopping",
     "title": "shopping",
     "color": "#42a5f5"
   },
   {
-    "name": "red",
+    "name": "important",
     "title": "important",
     "color": "#ef5350"
   },
   {
-    "name": "green",
+    "name": "appointments",
     "title": "Appointments",
     "color": "#66bb6a"
   },
   {
-    "name": "brown",
+    "name": "misc",
     "title": "Misc",
     "color": "#795548"
   },
   {
-    "name": "yellow",
+    "name": "hobby",
     "title": "Hobby",
     "color": "#ffca28"
   }
