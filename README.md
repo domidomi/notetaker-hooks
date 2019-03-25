@@ -1,6 +1,8 @@
 # notetaker-hooks
 Simple notetaker app based on hooks, made for learning purposes.
 
+#### Live demo: https://notetaker-hooks.netlify.com
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
