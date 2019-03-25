@@ -41,13 +41,31 @@ const NoteFooter = styled(NoteSection)`
 
 const NoteCard = ({ data }) => {
   const [tags, setTags] = useState(null);
+  const [displayDate, setDisplayDate] = useState(null);
 
   const getTagsToDisplay = () => {
     return tagsData.filter(tag => data.tags.includes(tag.name));
   };
 
+  const getDisplayDate = date => {
+    const today = new Date();
+    const daysAgo = Math.round(
+      (today.getTime() - new Date(date).getTime()) / 86400000
+    );
+
+    if (daysAgo > 7) {
+      return new Date(date).toLocaleDateString();
+    }
+
+    const info =
+      daysAgo <= 0 ? `today` : `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`;
+
+    return info;
+  };
+
   useEffect(() => {
     setTags(getTagsToDisplay());
+    setDisplayDate(getDisplayDate(data.createdAt));
   }, [data]);
 
   return (
@@ -56,6 +74,8 @@ const NoteCard = ({ data }) => {
         <NoteTitle>{data.content.title}</NoteTitle>
         <NoteContent>{data.content.text}</NoteContent>
         <NoteFooter>
+          {displayDate}
+
           {tags &&
             tags.map(tag => <ColorTag key={tag.name} color={tag.color} />)}
         </NoteFooter>

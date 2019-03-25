@@ -12,16 +12,31 @@ const masonryOptions = {
 };
 
 const imagesLoadedOptions = { background: ".my-bg-image-el" };
+
+const sortByDateReversed = notes => {
+  const all = notes
+    .sort((a, b) => {
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    })
+    .reverse();
+  const important = all.filter(el => el.tags.includes("important"));
+
+  const regular = all.filter(el => !el.tags.includes("important"));
+
+  return important.concat(regular);
+};
+
 const NotesList = ({ notes }) => {
-  const [notesToDisplay, setNotesToDisplay] = useState(notes);
+  const [notesToDisplay, setNotesToDisplay] = useState(
+    sortByDateReversed(notes)
+  );
 
   useEffect(() => {
-    setNotesToDisplay(notes);
+    setNotesToDisplay(sortByDateReversed(notes));
   }, [notes]);
 
   return (
     <NotesListContent>
-      {notesToDisplay && notesToDisplay.map(note => <NoteCard key={note._id} data={note} />)}
       {notesToDisplay && (
         <Masonry
           className={"my-gallery-class"} // default ''
