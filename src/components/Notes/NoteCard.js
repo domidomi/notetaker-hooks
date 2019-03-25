@@ -36,7 +36,12 @@ const NoteContent = styled(NoteSection)`
 
 const NoteFooter = styled(NoteSection)`
   font-size: 11px;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ColorTags = styled.div`
+  margin: auto 0 auto auto;
 `;
 
 const NoteCard = ({ data }) => {
@@ -49,16 +54,27 @@ const NoteCard = ({ data }) => {
 
   const getDisplayDate = date => {
     const today = new Date();
+    const noteDate = new Date(date);
     const daysAgo = Math.round(
-      (today.getTime() - new Date(date).getTime()) / 86400000
+      (today.getTime() - noteDate.getTime()) / 86400000
     );
 
     if (daysAgo > 7) {
-      return new Date(date).toLocaleDateString();
+      return noteDate.toLocaleDateString();
     }
 
+    const timeOfCreation = `${noteDate.getHours()}:${
+      noteDate.getMinutes() < 10
+        ? "0" + noteDate.getMinutes()
+        : noteDate.getMinutes()
+    }`;
+
     const info =
-      daysAgo <= 0 ? `today` : `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`;
+      daysAgo <= 0
+        ? `Today, ${timeOfCreation}`
+        : `${noteDate.toLocaleDateString("en-EN", {
+            weekday: "long"
+          })}, ${timeOfCreation}`;
 
     return info;
   };
@@ -76,8 +92,10 @@ const NoteCard = ({ data }) => {
         <NoteFooter>
           {displayDate}
 
-          {tags &&
-            tags.map(tag => <ColorTag key={tag.name} color={tag.color} />)}
+          <ColorTags>
+            {tags &&
+              tags.map(tag => <ColorTag key={tag.name} color={tag.color} />)}
+          </ColorTags>
         </NoteFooter>
       </NoteWrapper>
     </Note>
