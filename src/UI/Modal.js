@@ -22,7 +22,7 @@ const StyledModal = styled.div`
 `;
 
 const Modal = props => {
-  return <StyledModal>{props.child}</StyledModal>;
+  return <StyledModal>{props.children}</StyledModal>;
 };
 
 export default Modal;

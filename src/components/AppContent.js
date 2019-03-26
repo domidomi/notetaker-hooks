@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -23,7 +23,15 @@ const StyledContent = styled.div`
 `;
 
 const AppContent = ({ activeFilter, handleNoteFilterChange, notes }) => {
-  const [modalOpened, setModalOpened] = useState(true);
+  const [modalContent, setModalContent] = useState(null);
+
+  const setupModal = content => {
+    setModalContent(content);
+  };
+
+  const clearModal = () => {
+    setModalContent(null);
+  };
 
   return (
     <StyledContainer fluid={true}>
@@ -31,21 +39,15 @@ const AppContent = ({ activeFilter, handleNoteFilterChange, notes }) => {
         <Navbar
           activeFilter={activeFilter}
           handleNoteFilterChange={handleNoteFilterChange}
+          setupModal={setupModal}
         />
       </StyledNavbar>
       <StyledContent>{notes && <NotesList notes={notes} />}</StyledContent>
 
-      {modalOpened && (
+      {modalContent && (
         <>
-          <Modal>
-            <span>modal content</span>
-          </Modal>
-          <Backdrop
-            clicked={() => {
-              console.log("click");
-              setModalOpened(false);
-            }}
-          />
+          <Modal>{modalContent}</Modal>
+          <Backdrop clicked={() => clearModal()} />
         </>
       )}
     </StyledContainer>

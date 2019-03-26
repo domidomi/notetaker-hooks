@@ -11,8 +11,9 @@ const NavbarContent = styled.div`
   padding: 20px;
 `;
 
-const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
+const Navbar = ({ activeFilter, handleNoteFilterChange, setupModal }) => {
   const [filters, setFilters] = useState(() => tagsData);
+  const modal = <div>this will be our modal</div>;
 
   return (
     <NavbarContent>
@@ -36,7 +37,7 @@ const Navbar = ({ activeFilter, handleNoteFilterChange }) => {
         </>
       ) : null}
 
-      
+      <button onClick={() => setupModal(modal)}>Add new note!</button>
     </NavbarContent>
   );
 };
