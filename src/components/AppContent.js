@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Navbar, NotesList } from "./";
+import { Modal, Backdrop } from "../UI";
 
 const StyledContainer = styled.div`
   background-color: #eee;
@@ -22,6 +23,8 @@ const StyledContent = styled.div`
 `;
 
 const AppContent = ({ activeFilter, handleNoteFilterChange, notes }) => {
+  const [modalOpened, setModalOpened] = useState(true);
+
   return (
     <StyledContainer fluid={true}>
       <StyledNavbar>
@@ -30,9 +33,21 @@ const AppContent = ({ activeFilter, handleNoteFilterChange, notes }) => {
           handleNoteFilterChange={handleNoteFilterChange}
         />
       </StyledNavbar>
-      <StyledContent>
-        {notes && <NotesList notes={notes} />}
-      </StyledContent>
+      <StyledContent>{notes && <NotesList notes={notes} />}</StyledContent>
+
+      {modalOpened && (
+        <>
+          <Modal>
+            <span>modal content</span>
+          </Modal>
+          <Backdrop
+            clicked={() => {
+              console.log("click");
+              setModalOpened(false);
+            }}
+          />
+        </>
+      )}
     </StyledContainer>
   );
 };
