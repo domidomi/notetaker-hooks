@@ -1,29 +1,44 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import "./App.scss";
 
-import notesData from "../../assets/notes.json";
-
-import { AppContent} from "../../components";
+import { FirebaseContext } from "../../utils/Firebase";
+import { AppContent } from "../../components";
 
 const App = () => {
-  const [displayedNotes, setDisplayedNotes] = useState(notesData);
+  const [allNotes, setAllNotes] = useState(null);
+  const [displayedNotes, setDisplayedNotes] = useState(null);
   const [notesFilter, setNotesFilter] = useState(null);
+  const firebase = useContext(FirebaseContext);
 
   const handleNoteFilterChange = useCallback(filter => {
     setNotesFilter(filter);
   }, []);
 
   useEffect(() => {
-    let notesFromTag = notesData;
+    const unsubscribe = firebase.notesRef.onSnapshot(function(snapshot) {
+      let notes = [];
+      snapshot.forEach(function(doc) {
+        notes.push(doc.data());
+      });
+      setAllNotes(notes);
+    });
 
+    return () => {
+      // Stop listening to changes
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    let filteredNotes = allNotes;
     if (notesFilter) {
-      notesFromTag = notesFromTag.filter(note =>
+      filteredNotes = filteredNotes.filter(note =>
         note.tags.includes(notesFilter.name)
       );
     }
 
-    setDisplayedNotes(notesFromTag);
-  }, [notesFilter]);
+    setDisplayedNotes(filteredNotes);
+  }, [allNotes, notesFilter]);
 
   return (
     <AppContent

@@ -31,7 +31,7 @@ const AppContent = ({ activeFilter, handleNoteFilterChange, notes }) => {
         />
       </StyledNavbar>
       <StyledContent>
-        <NotesList notes={notes} />
+        {notes && <NotesList notes={notes} />}
       </StyledContent>
     </StyledContainer>
   );

@@ -23,7 +23,7 @@ class Firebase extends Component {
     return this.notesRef
       .add(data)
       .then(docRef => {
-        console.log("Document", docRef);
+        // console.log("Document", docRef);
         return true;
       })
       .catch(err => {
@@ -36,9 +36,9 @@ class Firebase extends Component {
     return this.notesRef
       .get()
       .then(snapshot => {
-        snapshot.forEach(doc => {
-          console.log(doc.id, "=>", doc.data());
-        });
+        // snapshot.forEach(doc => {
+        //   console.log(doc.id, "=>", doc.data());
+        // });
         return snapshot;
       })
       .catch(err => {
@@ -52,7 +52,7 @@ class Firebase extends Component {
       .doc(id)
       .get()
       .then(snapshot => {
-        console.log("snapshot", "=>", snapshot.data());
+        // console.log("snapshot", "=>", snapshot.data());
         return snapshot.data();
       })
       .catch(err => {
