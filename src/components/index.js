@@ -1,3 +1,4 @@
+export { default as AppContent } from "./AppContent";
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as CategoryFilter } from "./Navbar/CategoryFilter";
 export { default as NotesList } from "./Notes/NotesList";

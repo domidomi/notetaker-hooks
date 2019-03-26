@@ -1,28 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./App.scss";
 
-import styled from "styled-components";
-
-import { Navbar, NotesList } from "../../components";
-
 import notesData from "../../assets/notes.json";
 
-const StyledContainer = styled.div`
-  background-color: #eee;
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-`;
-
-const StyledNavbar = styled.div`
-  width: 100%;
-  height: 70px;
-  position: fixed;
-`;
-
-const StyledContent = styled.div`
-  padding-top: 70px;
-`;
+import { AppContent} from "../../components";
 
 const App = () => {
   const [displayedNotes, setDisplayedNotes] = useState(notesData);
@@ -45,17 +26,11 @@ const App = () => {
   }, [notesFilter]);
 
   return (
-    <StyledContainer fluid={true}>
-      <StyledNavbar>
-        <Navbar
-          activeFilter={notesFilter}
-          handleNoteFilterChange={handleNoteFilterChange}
-        />
-      </StyledNavbar>
-      <StyledContent>
-        <NotesList notes={displayedNotes} />
-      </StyledContent>
-    </StyledContainer>
+    <AppContent
+      activeFilter={notesFilter}
+      notes={displayedNotes}
+      handleNoteFilterChange={handleNoteFilterChange}
+    />
   );
 };
 
