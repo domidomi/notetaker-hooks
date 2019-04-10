@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { CategoryFilter } from "../index";
+import { CategoryFilter, NewNote } from "../index";
 import tagsData from "../../assets/tags.json";
 
 const NavbarContent = styled.div`
@@ -13,7 +13,7 @@ const NavbarContent = styled.div`
 
 const Navbar = ({ activeFilter, handleNoteFilterChange, setupModal }) => {
   const [filters, setFilters] = useState(() => tagsData);
-  const modal = <div>this will be our modal</div>;
+  const modalContent = <NewNote />;
 
   return (
     <NavbarContent>
@@ -37,7 +37,7 @@ const Navbar = ({ activeFilter, handleNoteFilterChange, setupModal }) => {
         </>
       ) : null}
 
-      <button onClick={() => setupModal(modal)}>Add new note!</button>
+      <button onClick={() => setupModal(modalContent)}>Add new note!</button>
     </NavbarContent>
   );
 };
