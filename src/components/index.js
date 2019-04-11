@@ -5,3 +5,4 @@ export { default as NotesList } from "./Notes/NotesList";
 export { default as NoteCard } from "./Notes/NoteCard";
 export { default as NewNote } from "./Notes/NewNote";
 export { default as ColorTag } from "./Notes/ColorTag";
+export { default as NewFilter } from "./NewFilter";
