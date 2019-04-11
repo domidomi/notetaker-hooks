@@ -17,6 +17,7 @@ class Firebase extends Component {
     firebase.initializeApp(config);
     this.db = firebase.firestore();
     this.notesRef = this.db.collection("notes");
+    this.tagsRef = this.db.collection("tags");
   }
 
   setNoteData = data => {
@@ -28,6 +29,25 @@ class Firebase extends Component {
       })
       .catch(err => {
         console.error("Error adding document: ", err);
+        return false;
+      });
+  };
+
+  setTagData = data => {
+    const key = data.name
+      .toLowerCase()
+      .split(" ")
+      .join("");
+
+    this.tagsRef
+      .doc(key)
+      .set(data)
+      .then(function() {
+        console.log("Document successfully written!");
+        return true;
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
         return false;
       });
   };
