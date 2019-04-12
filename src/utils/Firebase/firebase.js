@@ -67,6 +67,18 @@ class Firebase extends Component {
       });
   };
 
+  getTagsData = () => {
+    return this.tagsRef
+      .get()
+      .then(snapshot => {
+        return snapshot;
+      })
+      .catch(err => {
+        console.log("Error getting documents", err);
+        return false;
+      });
+  };
+
   getNoteData = id => {
     return this.notesRef
       .doc(id)
