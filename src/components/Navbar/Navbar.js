@@ -17,9 +17,11 @@ const Navbar = ({ activeFilter, handleNoteFilterChange, setupModal, tags }) => {
     setFilters(tags);
   }, [tags]);
 
+  console.log("filtersfilters", filters);
+
   return (
     <NavbarContent>
-      {filters ? (
+      {filters.length ? (
         <>
           <span>Filter: </span>
           <CategoryFilter

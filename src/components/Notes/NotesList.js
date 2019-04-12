@@ -14,11 +14,14 @@ const masonryOptions = {
 const imagesLoadedOptions = { background: ".my-bg-image-el" };
 
 const sortByDateReversed = notes => {
+  if (!notes.length) return null;
+
   const all = notes
     .sort((a, b) => {
       return new Date(a.createdAt) - new Date(b.createdAt);
     })
     .reverse();
+
   const important = all.filter(el => el.tags.includes("important"));
 
   const regular = all.filter(el => !el.tags.includes("important"));

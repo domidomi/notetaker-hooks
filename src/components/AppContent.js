@@ -35,6 +35,10 @@ const AppContent = ({ activeFilter, handleNoteFilterChange, notes, tags }) => {
 
   return (
     <StyledContainer fluid={true}>
+      {/* {tags && tags.map((e, i) => (
+        <p>{i}</p>
+      ))} */}
+
       <StyledNavbar>
         <Navbar
           activeFilter={activeFilter}

@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
+import { useRedux } from "use-redux";
 import "./App.scss";
 
 import { FirebaseContext } from "../../utils/Firebase";
 import { AppContent } from "../../components";
 
+import * as notesActions from "../../_actions/notes.actions";
+import * as tagsActions from "../../_actions/tags.actions";
+
+const notesSelector = state => state.notes;
+const tagsSelector = state => state.tags;
+
 const App = () => {
-  const [allNotes, setAllNotes] = useState(null);
-  const [allTags, setAllTags] = useState(null);
+  const [notes, setNotes] = useRedux([notesSelector], [notesActions.set]);
+  const [tags, setTags] = useRedux([tagsSelector], [tagsActions.set]);
   const [displayedNotes, setDisplayedNotes] = useState(null);
   const [notesFilter, setNotesFilter] = useState(null);
   const firebase = useContext(FirebaseContext);
@@ -21,7 +28,7 @@ const App = () => {
       snapshot.forEach(function(doc) {
         notes.push(doc.data());
       });
-      setAllNotes(notes);
+      setNotes(notes);
     });
 
     const unsubscribeTags = firebase.tagsRef.onSnapshot(snapshot => {
@@ -29,7 +36,7 @@ const App = () => {
       snapshot.forEach(function(doc) {
         tags.push(doc.data());
       });
-      setAllTags(tags);
+      setTags(tags);
     });
 
     return () => {
@@ -39,8 +46,10 @@ const App = () => {
     };
   }, []);
 
+  console.log("notes", notes);
+
   useEffect(() => {
-    let filteredNotes = allNotes;
+    let filteredNotes = notes;
     if (notesFilter) {
       filteredNotes = filteredNotes.filter(note =>
         note.tags.includes(notesFilter.name)
@@ -48,13 +57,13 @@ const App = () => {
     }
 
     setDisplayedNotes(filteredNotes);
-  }, [allNotes, notesFilter]);
+  }, [notes, notesFilter]);
 
   return (
     <AppContent
       activeFilter={notesFilter}
       notes={displayedNotes}
-      tags={allTags}
+      tags={tags}
       handleNoteFilterChange={handleNoteFilterChange}
     />
   );
