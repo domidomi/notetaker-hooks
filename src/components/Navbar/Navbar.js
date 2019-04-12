@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { CategoryFilter, NewNote, NewFilter } from "../index";
-import tagsData from "../../assets/tags.json";
 
 const NavbarContent = styled.div`
   background-color: #fff;
@@ -11,8 +10,12 @@ const NavbarContent = styled.div`
   padding: 20px;
 `;
 
-const Navbar = ({ activeFilter, handleNoteFilterChange, setupModal }) => {
-  const [filters, setFilters] = useState(() => tagsData);
+const Navbar = ({ activeFilter, handleNoteFilterChange, setupModal, tags }) => {
+  const [filters, setFilters] = useState(tags);
+
+  useEffect(() => {
+    setFilters(tags);
+  }, [tags]);
 
   return (
     <NavbarContent>

@@ -6,6 +6,7 @@ import { AppContent } from "../../components";
 
 const App = () => {
   const [allNotes, setAllNotes] = useState(null);
+  const [allTags, setAllTags] = useState(null);
   const [displayedNotes, setDisplayedNotes] = useState(null);
   const [notesFilter, setNotesFilter] = useState(null);
   const firebase = useContext(FirebaseContext);
@@ -15,7 +16,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = firebase.notesRef.onSnapshot(function(snapshot) {
+    const unsubscribeNotes = firebase.notesRef.onSnapshot(snapshot => {
       let notes = [];
       snapshot.forEach(function(doc) {
         notes.push(doc.data());
@@ -23,9 +24,18 @@ const App = () => {
       setAllNotes(notes);
     });
 
+    const unsubscribeTags = firebase.tagsRef.onSnapshot(snapshot => {
+      let tags = [];
+      snapshot.forEach(function(doc) {
+        tags.push(doc.data());
+      });
+      setAllTags(tags);
+    });
+
     return () => {
       // Stop listening to changes
-      unsubscribe();
+      unsubscribeNotes();
+      unsubscribeTags();
     };
   }, []);
 
@@ -44,6 +54,7 @@ const App = () => {
     <AppContent
       activeFilter={notesFilter}
       notes={displayedNotes}
+      tags={allTags}
       handleNoteFilterChange={handleNoteFilterChange}
     />
   );

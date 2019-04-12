@@ -22,7 +22,7 @@ const StyledContent = styled.div`
   padding-top: 70px;
 `;
 
-const AppContent = ({ activeFilter, handleNoteFilterChange, notes }) => {
+const AppContent = ({ activeFilter, handleNoteFilterChange, notes, tags }) => {
   const [modalContent, setModalContent] = useState(null);
 
   const setupModal = content => {
@@ -40,6 +40,7 @@ const AppContent = ({ activeFilter, handleNoteFilterChange, notes }) => {
           activeFilter={activeFilter}
           handleNoteFilterChange={handleNoteFilterChange}
           setupModal={setupModal}
+          tags={tags}
         />
       </StyledNavbar>
       <StyledContent>{notes && <NotesList notes={notes} />}</StyledContent>
